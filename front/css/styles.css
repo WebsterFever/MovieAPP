@@ -1,0 +1,105 @@
+/* GENERAL */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0f0f0f;
+  color: #ffffff;
+}
+
+
+#header {
+  background-color: #1c1c1c;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #e50914;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-list a:hover {
+  color: #e50914;
+}
+
+
+#main-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  margin-bottom: 30px;
+  font-size: 26px;
+  text-align: center;
+}
+
+
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.movie-card {
+  background-color: #1c1c1c;
+  width: 220px;
+  padding: 15px;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.movie-title {
+  margin: 12px 0 6px;
+  font-size: 17px;
+}
+
+.movie-card p {
+  font-size: 14px;
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.movie-rate {
+  margin-top: 8px;
+  color: gold;
+  font-weight: bold;
+}
+
+
+#footer {
+  background-color: #1c1c1c;
+  text-align: center;
+  padding: 15px;
+  margin-top: 250px;
+  font-size: 14px;
+}

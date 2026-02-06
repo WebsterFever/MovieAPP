@@ -1,4 +1,4 @@
-const tempData = [
+export const tempData = [
   {
     title: "Guardians of the Galaxy Vol. 2",
     year: 2017,
