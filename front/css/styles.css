@@ -72,7 +72,7 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
-.movie-card img {
+.card-image {
   width: 100%;
   border-radius: 10px;
 }
@@ -93,6 +93,14 @@ body {
   margin-top: 8px;
   color: gold;
   font-weight: bold;
+}
+
+
+.card-text {
+  font-size: 14px;
+  color: #cccccc;
+  margin: 6px 0;
+  line-height: 1.5;
 }
 
 
