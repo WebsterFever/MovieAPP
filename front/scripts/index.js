@@ -1,22 +1,31 @@
-
-
 const renderCards = require("./renderCards");
+const axios = require("axios");
+const initForm = require("./form");
 
-const axios = require('axios');
+// wait for DOM once
+document.addEventListener("DOMContentLoaded", () => {
 
-//using async await
+  // Initialize form if we're on form page
+  initForm();
+
+  // Fetch movies (only if container exists)
+  const moviesContainer = document.getElementById("moviesContainer");
+
+  if (moviesContainer) {
+    fetchMovies();
+  }
+
+});
 
 const fetchMovies = async () => {
-    try {
-        const response = await axios.get("https://students-api.up.railway.app/movies");  
-        console.log(response.data);
-        renderCards(response.data);
-    } catch (error) {
-        console.error('Error fetching movies:', error);
-    }
+  try {
+    const response = await axios.get("http://localhost:3000/movies");
+    console.log(response.data);
+    renderCards(response.data);
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
 };
-
-fetchMovies();
 
 /*
 const fetchData = () => {

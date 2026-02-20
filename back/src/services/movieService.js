@@ -1,3 +1,6 @@
+
+
+
 const movies = [
   {
     id: 1,
@@ -43,8 +46,8 @@ module.exports = {
 
   createMovie: async (movieData) => {
     const newMovie = {
-      id: id++,
-      ...movieData,
+      id: id++,  //iterar
+      ...movieData,  //spread operador 
     };
 
     movies.push(newMovie);
