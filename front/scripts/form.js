@@ -1,11 +1,41 @@
 function initForm() {
     const form = document.querySelector(".form");
-    if (!form) return; // prevents crash on pages without form
+    if (!form) return;
 
     const clearBtn = document.getElementById("clearBtn");
+    const genreContainer = document.getElementById("genreContainer");
+    const genresList = [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Drama",
+        "Fantasy",
+        "Horror",
+        "Mystery",
+        "Thriller",
+        "Sci-Fi"
+    ];
+
+    genresList.forEach(genre => {
+
+        const label = document.createElement("label");
+        label.classList.add("btn", "genre-btn", "m-2");
+
+        label.innerHTML = `
+        <input type="checkbox" name="genre" value="${genre}" class="genre-checkbox">
+        <span class="checkbox-icon"></span>
+        ${genre}
+    `;
+
+        genreContainer.appendChild(label);
+    });
 
     function clearForm() {
         form.reset();
+
+
+        const activeButtons = genreContainer.querySelectorAll(".active");
+        activeButtons.forEach(btn => btn.classList.remove("active"));
     }
 
     if (clearBtn) {
@@ -22,10 +52,11 @@ function initForm() {
         const rate = document.getElementById("rate").value.trim();
         const poster = document.getElementById("poster").value.trim();
 
-        const genreCheckboxes = document.querySelectorAll(
+        const checkedGenres = document.querySelectorAll(
             'input[name="genre"]:checked'
         );
-        const genres = Array.from(genreCheckboxes).map(cb => cb.value);
+
+        const genres = Array.from(checkedGenres).map(cb => cb.value);
 
         if (
             !title ||
@@ -50,7 +81,7 @@ function initForm() {
             poster
         };
 
-        console.log("Película válida:", movieData);
+        console.log("Movie created:", movieData);
         alert("Formulario válido ✅");
 
         clearForm();
