@@ -1,5 +1,5 @@
 
-
+/*
 
 const movies = [
   {
@@ -55,7 +55,7 @@ module.exports = {
   },
 };
 
-/*
+
 {
   "title": "Skyscraper",
   "year": 2018,
@@ -65,3 +65,20 @@ module.exports = {
   "rate": 5.8,
   "poster": "https://cinedweller.com/wp-content/uploads/2020/06/skyscraper-affiche-400x650.jpg.webp"
 }*/
+
+const Movie = require("../models/Movies");
+
+module.exports = {
+  
+  // Get all movies
+  getMovies: async () => {
+    return await Movie.find();
+  },
+
+  // Create movie
+  createMovie: async (movieData) => {
+    const newMovie = new Movie(movieData);
+    return await newMovie.save();
+  },
+
+};

@@ -1,3 +1,4 @@
+
 const moviesContainer = document.getElementById("moviesContainer");
 
 const renderCards = (movies) => {
