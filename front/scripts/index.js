@@ -2,13 +2,11 @@ const renderCards = require("./renderCards");
 const axios = require("axios");
 const initForm = require("./form");
 
-// wait for DOM once
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Initialize form if we're on form page
   initForm();
 
-  // Fetch movies (only if container exists)
   const moviesContainer = document.getElementById("moviesContainer");
 
   if (moviesContainer) {

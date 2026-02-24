@@ -1,4 +1,3 @@
-
 .card {
   background-color: #1c1c1c;
   color: #ffffff;
@@ -14,7 +13,7 @@
 .form-control:focus {
   background-color: #2a2a2a;
   border-color: #e50914;
-  box-shadow: 0 0 0 0.2rem rgba(229,9,20,0.25);
+  box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
   color: #ffffff;
 }
 
@@ -47,7 +46,7 @@
 }
 
 .genre-item input {
-  display: none; /* hide default checkbox */
+  display: none;
 }
 
 .genre-item span {
@@ -60,7 +59,7 @@
   font-size: 14px;
 }
 
-.genre-item input:checked + span {
+.genre-item input:checked+span {
   background-color: #e50914;
   border-color: #e50914;
 }
@@ -72,15 +71,17 @@
 .bg-light {
   background-color: #1c1c1c !important;
 }
+
 .genre-options {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 18px;
   margin-top: 10px;
 
-  justify-content: center;   
+  justify-content: center;
   text-align: center;
 }
+
 .genre-title {
   display: block;
   text-align: center;
@@ -89,52 +90,52 @@
 
 /* Genre Button Style */
 .genre-btn {
-    border: 1px solid #e50914;
-    color: #e50914;
-    background: transparent;
-    padding: 8px 18px;
-    border-radius: 6px;
-    position: relative;
-    transition: 0.3s ease;
-    cursor: pointer;
+  border: 1px solid #e50914;
+  color: #e50914;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 6px;
+  position: relative;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
-/* Hide default checkbox */
+
 .genre-checkbox {
-    display: none;
+  display: none;
 }
 
-/* Small custom checkbox square */
+
 .checkbox-icon {
-    width: 14px;
-    height: 14px;
-    border: 2px solid #e50914;
-    display: inline-block;
-    margin-right: 8px;
-    vertical-align: middle;
-    transition: 0.3s ease;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #e50914;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  transition: 0.3s ease;
 }
 
-/* When checked */
-.genre-checkbox:checked + .checkbox-icon {
-    background: #e50914;
+
+.genre-checkbox:checked+.checkbox-icon {
+  background: #e50914;
 }
 
-/* Change button background when selected */
-.genre-checkbox:checked ~ span + * ,
-.genre-checkbox:checked ~ * {
-    color: white;
+
+.genre-checkbox:checked~span+*,
+.genre-checkbox:checked~* {
+  color: white;
 }
 
-.genre-checkbox:checked ~ .checkbox-icon {
-    background: #e50914;
+.genre-checkbox:checked~.checkbox-icon {
+  background: #e50914;
 }
 
-.genre-checkbox:checked ~ * {
-    color: white;
+.genre-checkbox:checked~* {
+  color: white;
 }
 
 .genre-btn:has(input:checked) {
-    background-color: #e50914;
-    color: white;
+  background-color: #e50914;
+  color: white;
 }

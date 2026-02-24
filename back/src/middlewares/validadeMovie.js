@@ -9,14 +9,13 @@ const validateMovie = (req, res, next) => {
         poster,
     } = req.body;
 
-    // Required fields
+
     if (!title || !year || !director) {
         return res.status(400).json({
             error: "Title, year, and director are required",
         });
     }
 
-    // Type validations
     if (typeof title !== "string" || title.trim().length < 2) {
         return res.status(400).json({
             error: "Title must be a string with at least 2 characters",

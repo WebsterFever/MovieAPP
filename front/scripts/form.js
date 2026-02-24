@@ -19,7 +19,7 @@ function initForm() {
         "Sci-Fi"
     ];
 
-    // ===== CREATE GENRE BUTTONS (STYLE NOT TOUCHED) =====
+  
     genresList.forEach(genre => {
 
         const label = document.createElement("label");
@@ -34,7 +34,7 @@ function initForm() {
         genreContainer.appendChild(label);
     });
 
-    // ===== CLEAR FORM =====
+  
     function clearForm() {
         form.reset();
 
@@ -46,7 +46,7 @@ function initForm() {
         clearBtn.addEventListener("click", clearForm);
     }
 
-    // ===== HANDLE SUBMIT (WITH AXIOS POST) =====
+  
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
@@ -96,6 +96,9 @@ function initForm() {
             alert("Película creada correctamente ✅");
 
             clearForm();
+            
+     
+            window.location.href = "../index.html";
 
         } catch (error) {
             console.error("Error creating movie:", error);

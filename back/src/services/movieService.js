@@ -70,15 +70,17 @@ const Movie = require("../models/Movies");
 
 module.exports = {
   
-  // Get all movies
   getMovies: async () => {
     return await Movie.find();
   },
 
-  // Create movie
   createMovie: async (movieData) => {
     const newMovie = new Movie(movieData);
     return await newMovie.save();
+  },
+
+  deleteMovie: async (id) => {
+    return await Movie.findByIdAndDelete(id);
   },
 
 };
