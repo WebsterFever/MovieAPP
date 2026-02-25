@@ -11,10 +11,11 @@ module.exports = {
       res.status(500).json({ message: "Internal Server Error" });
     }
   },
-  
+
   createMovie: async (req, res) => {
     try {
-      const movieData = req.body;
+      const { title, year, director, duration, genre, rate, poster } = req.body;
+      const movieData = { title, year, director, duration, genre, rate, poster };
       const newMovie = await moviesService.createMovie(movieData);
       res.status(201).json(newMovie);
     } catch (error) {

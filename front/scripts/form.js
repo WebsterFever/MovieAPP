@@ -19,9 +19,7 @@ function initForm() {
         "Sci-Fi"
     ];
 
-  
     genresList.forEach(genre => {
-
         const label = document.createElement("label");
         label.classList.add("btn", "genre-btn", "m-2");
 
@@ -34,21 +32,58 @@ function initForm() {
         genreContainer.appendChild(label);
     });
 
-  
     function clearForm() {
         form.reset();
 
         const activeButtons = genreContainer.querySelectorAll(".active");
         activeButtons.forEach(btn => btn.classList.remove("active"));
+        
+     
+        const errorMessages = document.querySelectorAll(".error-message");
+        errorMessages.forEach(error => error.remove());
     }
 
     if (clearBtn) {
         clearBtn.addEventListener("click", clearForm);
     }
 
-  
+
+    function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const existingError = field.parentElement.querySelector(".error-message");
+        
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "error-message text-danger small mt-1";
+        errorDiv.textContent = message;
+        field.parentElement.appendChild(errorDiv);
+        
+       
+        field.classList.add("is-invalid");
+    }
+
+
+    function clearFieldError(fieldId) {
+        const field = document.getElementById(fieldId);
+        field.classList.remove("is-invalid");
+        const existingError = field.parentElement.querySelector(".error-message");
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
+
+
+        const fields = ["title", "year", "director", "duration", "rate", "poster"];
+        fields.forEach(field => clearFieldError(field));
+        
+        const genreError = document.querySelector(".genre-error");
+        if (genreError) genreError.remove();
 
         const title = document.getElementById("title").value.trim();
         const year = document.getElementById("year").value.trim();
@@ -62,17 +97,86 @@ function initForm() {
         );
 
         const genres = Array.from(checkedGenres).map(cb => cb.value);
+        
+        let hasErrors = false;
 
-        if (
-            !title ||
-            !year ||
-            !director ||
-            !duration ||
-            !rate ||
-            !poster ||
-            genres.length === 0
-        ) {
-            alert("Todos los campos son obligatorios.");
+    
+        if (!title) {
+            showError("title", "Title is required");
+            hasErrors = true;
+        } else if (title.length < 2) {
+            showError("title", "Title must have at least 2 characters");
+            hasErrors = true;
+        }
+
+        if (!director) {
+            showError("director", "Director is required");
+            hasErrors = true;
+        } else if (director.length < 2) {
+            showError("director", "Director must have at least 2 characters");
+            hasErrors = true;
+        }
+
+   
+        const currentYear = new Date().getFullYear();
+        if (!year) {
+            showError("year", "Year is required");
+            hasErrors = true;
+        } else if (isNaN(year) || year.trim() === "") {
+            showError("year", "Year must be a valid number");
+            hasErrors = true;
+        } else {
+            const yearNum = Number(year);
+            if (yearNum < 1888 || yearNum > currentYear) {
+                showError("year", `Year must be between 1888 and ${currentYear}`);
+                hasErrors = true;
+            }
+        }
+
+        if (!duration) {
+            showError("duration", "Duration is required");
+            hasErrors = true;
+        }
+
+
+        if (!rate) {
+            showError("rate", "Rate is required");
+            hasErrors = true;
+        } else if (isNaN(rate) || rate.trim() === "") {
+            showError("rate", "Rate must be a valid number");
+            hasErrors = true;
+        } else {
+            const rateNum = Number(rate);
+            if (rateNum < 0 || rateNum > 10) {
+                showError("rate", "Rate must be between 0 and 10");
+                hasErrors = true;
+            }
+        }
+
+     
+        if (!poster) {
+            showError("poster", "Poster URL is required");
+            hasErrors = true;
+        } else {
+        
+            const imageRegex = /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i;
+            
+            if (!imageRegex.test(poster)) {
+                showError("poster", "Poster URL must end with a valid image extension (jpg, jpeg, png, gif, bmp, webp, svg)");
+                hasErrors = true;
+            }
+        }
+
+    
+        if (genres.length === 0) {
+            const genreErrorDiv = document.createElement("div");
+            genreErrorDiv.className = "genre-error text-danger small mt-2";
+            genreErrorDiv.textContent = "Please select at least one genre";
+            genreContainer.parentElement.appendChild(genreErrorDiv);
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
             return;
         }
 
@@ -97,12 +201,16 @@ function initForm() {
 
             clearForm();
             
-     
             window.location.href = "../index.html";
 
         } catch (error) {
             console.error("Error creating movie:", error);
-            alert("Error al crear la película ❌");
+    
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(`Error: ${error.response.data.error}`);
+            } else {
+                alert("Error al crear la película ❌");
+            }
         }
     });
 }

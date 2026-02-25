@@ -9,7 +9,7 @@ const validateMovie = (req, res, next) => {
         poster,
     } = req.body;
 
-
+    // Required fields validation
     if (!title || !year || !director) {
         return res.status(400).json({
             error: "Title, year, and director are required",
@@ -52,10 +52,21 @@ const validateMovie = (req, res, next) => {
         });
     }
 
-    if (poster && typeof poster !== "string") {
-        return res.status(400).json({
-            error: "Poster must be a string (URL)",
-        });
+    if (poster) {
+        if (typeof poster !== "string") {
+            return res.status(400).json({
+                error: "Poster must be a string (URL)",
+            });
+        }
+
+        
+        const imageRegex = /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i;
+        
+        if (!imageRegex.test(poster)) {
+            return res.status(400).json({
+                error: "Poster URL must end with a valid image extension (jpg, jpeg, png, gif, bmp, webp, svg)",
+            });
+        }
     }
 
     next();
