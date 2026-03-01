@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const fetchMovies = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/movies");
+    const response = await axios.get("https://vagarious-deanna-nearer.ngrok-free.dev/movies");
     renderCards(response.data);
   } catch (error) {
     console.error("Error fetching movies:", error);
