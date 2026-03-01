@@ -37,8 +37,8 @@ function initForm() {
 
         const activeButtons = genreContainer.querySelectorAll(".active");
         activeButtons.forEach(btn => btn.classList.remove("active"));
-        
-     
+
+
         const errorMessages = document.querySelectorAll(".error-message");
         errorMessages.forEach(error => error.remove());
     }
@@ -51,17 +51,17 @@ function initForm() {
     function showError(fieldId, message) {
         const field = document.getElementById(fieldId);
         const existingError = field.parentElement.querySelector(".error-message");
-        
+
         if (existingError) {
             existingError.remove();
         }
-        
+
         const errorDiv = document.createElement("div");
         errorDiv.className = "error-message text-danger small mt-1";
         errorDiv.textContent = message;
         field.parentElement.appendChild(errorDiv);
-        
-       
+
+
         field.classList.add("is-invalid");
     }
 
@@ -81,7 +81,7 @@ function initForm() {
 
         const fields = ["title", "year", "director", "duration", "rate", "poster"];
         fields.forEach(field => clearFieldError(field));
-        
+
         const genreError = document.querySelector(".genre-error");
         if (genreError) genreError.remove();
 
@@ -97,10 +97,10 @@ function initForm() {
         );
 
         const genres = Array.from(checkedGenres).map(cb => cb.value);
-        
+
         let hasErrors = false;
 
-    
+
         if (!title) {
             showError("title", "Title is required");
             hasErrors = true;
@@ -117,7 +117,7 @@ function initForm() {
             hasErrors = true;
         }
 
-   
+
         const currentYear = new Date().getFullYear();
         if (!year) {
             showError("year", "Year is required");
@@ -153,21 +153,21 @@ function initForm() {
             }
         }
 
-     
+
         if (!poster) {
             showError("poster", "Poster URL is required");
             hasErrors = true;
         } else {
-        
+
             const imageRegex = /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/i;
-            
+
             if (!imageRegex.test(poster)) {
                 showError("poster", "Poster URL must end with a valid image extension (jpg, jpeg, png, gif, bmp, webp, svg)");
                 hasErrors = true;
             }
         }
 
-    
+
         if (genres.length === 0) {
             const genreErrorDiv = document.createElement("div");
             genreErrorDiv.className = "genre-error text-danger small mt-2";
@@ -193,19 +193,24 @@ function initForm() {
         try {
             const response = await axios.post(
                 "https://vagarious-deanna-nearer.ngrok-free.dev/movies",
-                movieData
+                movieData,
+                {
+                    headers: {
+                        "ngrok-skip-browser-warning": "true"
+                    }
+                }
             );
 
             console.log("Movie created:", response.data);
             alert("Película creada correctamente ✅");
 
             clearForm();
-            
+
             window.location.href = "../index.html";
 
         } catch (error) {
             console.error("Error creating movie:", error);
-    
+
             if (error.response && error.response.data && error.response.data.error) {
                 alert(`Error: ${error.response.data.error}`);
             } else {

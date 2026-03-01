@@ -17,10 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
 const fetchMovies = async () => {
   try {
     const response = await axios.get(
-      "https://vagarious-deanna-nearer.ngrok-free.dev/movies"
+      "https://vagarious-deanna-nearer.ngrok-free.dev/movies",
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "true"
+        }
+      }
     );
 
-    console.log(response.data); // 👈 VERY IMPORTANT
+    console.log("REAL DATA:", response.data);
     renderCards(response.data);
 
   } catch (error) {
